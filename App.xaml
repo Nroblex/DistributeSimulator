@@ -1,0 +1,9 @@
+﻿<Application x:Class="GitUtilSimulate.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GitUtilSimulate"
+             Startup="AppStart">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

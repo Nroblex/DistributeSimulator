@@ -1,0 +1,53 @@
+﻿<Window x:Class="GitUtilSimulate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModel="clr-namespace:GitUtilSimulate.ViewModel"
+        xmlns:Model="clr-namespace:GitUtilSimulate.Model"
+        xmlns:local="clr-namespace:GitUtilSimulate"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <StackPanel Margin="5">
+            
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Margin="10" FontSize="20">Enter input for GitSimulator</TextBlock>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Width="100" VerticalAlignment="Center">Extern-Ftp:</TextBlock>
+                <TextBox Width="200" Name="txtExternFtp" Text="{Binding ExternalFtp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Width="100" VerticalAlignment="Center">Extern-Ftp User:</TextBlock>
+                <TextBox Width="200" Name="txtExternFtpUser" Text="{Binding ExternalFtpUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Width="100" VerticalAlignment="Center">Extern-Ftp Pass:</TextBlock>
+                <TextBox Width="200" Name="txtExternFtpPassword" Text="{Binding ExternalFtpPassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Width="100" VerticalAlignment="Center">Buildnumber:</TextBlock>
+                <TextBox Width="200" Name="txtBuildNo" Text="{Binding BuildNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Width="100" VerticalAlignment="Center">Path-to-build:</TextBlock>
+                <TextBox Width="200" Name="txtPathBuild" Text="{Binding BuildPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Width="100" Margin="5" Command="{Binding SendGitUtil}">Create</Button>
+            </StackPanel>
+            
+        </StackPanel>
+        
+    </Grid>
+    <Window.DataContext>
+        <ViewModel:Presenter />
+    </Window.DataContext>
+</Window>
