@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GitUtilSimulate.Model
 {
     
-    public class GitUtilCommnad
+    public class GitUtilCommand
     {
 
         public string ExternalFTPPath { get; set; }

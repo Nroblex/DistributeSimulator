@@ -27,7 +27,8 @@
 
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Width="100" VerticalAlignment="Center">Extern-Ftp Pass:</TextBlock>
-                <TextBox Width="200" Name="txtExternFtpPassword" Text="{Binding ExternalFtpPassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <!--<TextBox Width="200" Name="txtExternFtpPassword" Text="{Binding ExternalFtpPassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>-->
+                <PasswordBox Width="200" Name="txtExternFtpPassword"></PasswordBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="5">
@@ -41,13 +42,15 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Width="100" Margin="5" Command="{Binding SendGitUtil}">Create</Button>
+                <Button Width="100" Margin="5" Command="{Binding SendGitUtilCommand}" 
+                        CommandParameter="{Binding ElementName=txtExternFtpPassword, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">Create</Button>
             </StackPanel>
             
         </StackPanel>
         
     </Grid>
     <Window.DataContext>
-        <ViewModel:Presenter />
+        <ViewModel:MainWindowViewModel />
+
     </Window.DataContext>
 </Window>

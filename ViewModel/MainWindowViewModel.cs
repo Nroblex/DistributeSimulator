@@ -4,19 +4,30 @@ using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace GitUtilSimulate.ViewModel
 {
-    public class Presenter : ObservableObject
+    public class MainWindowViewModel : ObservableObject
     {
         private string mExternalFtp;
         private string mExternalFtpUser;
-        private string mExternalFtpPass;
+        //private string mExternalFtpPass;
         private string mBuildNo;
         private string mBuildPath;
+        
+
+        private ICommand sendGitUtilCommand;
+
+        private bool canExecute = true;
 
         private Action<object, Exception> callBack;
+
+        public MainWindowViewModel()
+        {
+            SendGitUtilCommand = new DelegateCommand(DoSendGitJSON, param => this.canExecute);
+        }
 
         public string ExternalFtp
         {
@@ -35,16 +46,6 @@ namespace GitUtilSimulate.ViewModel
             {
                 mExternalFtpUser = value;
                 RaisePropertyChanged("ExternalFtpUser");
-            }
-        }
-
-        public string ExternalFtpPassWord
-        {
-            get { return mExternalFtpPass; }
-            set
-            {
-                mExternalFtpPass = value;
-                RaisePropertyChanged("ExternalFtpPassword");
             }
         }
 
@@ -69,22 +70,39 @@ namespace GitUtilSimulate.ViewModel
         }
 
 
-        public ICommand SendGitUtil
+        public ICommand SendGitUtilCommand
         {
             get
             {
-                return new DelegateCommand(DoSendGitJSON);
+                //return new DelegateCommand(DoSendGitJSON);
+                //return sendGitUtilCommand;
+                /*
+                sendGitUtilCommand= new  DelegateCommand(p =>
+                {
+                    var passwordBox = p as PasswordBox;
+                    var password = passwordBox.Password;
+                }, p=> {
+                    var passwordBox = p as PasswordBox;
+
+                    return !String.IsNullOrEmpty(passwordBox.Password);
+                });
+                */
+                return sendGitUtilCommand;
+            }
+            set
+            {
+                sendGitUtilCommand = value;
             }
         }
 
-        private void DoSendGitJSON()
+        private void DoSendGitJSON(object obj)
         {
-            GitUtilCommnad command = new GitUtilCommnad
+            GitUtilCommand command = new GitUtilCommand
             {
                 BuildNumber = mBuildNo,
                 PathToBuild = mBuildPath,
                 CreatedAt = DateTime.Now,
-                ExternalFTPPassword = mExternalFtpPass,
+                ExternalFTPPassword = (obj as PasswordBox).Password,
                 ExternalFTPPath = mExternalFtp,
                 ExternalFTPUser = mExternalFtpUser
             };
@@ -92,7 +110,7 @@ namespace GitUtilSimulate.ViewModel
             
 
             DataContractJsonSerializer serializer =
-                new DataContractJsonSerializer(typeof(GitUtilCommnad));
+                new DataContractJsonSerializer(typeof(GitUtilCommand));
             MemoryStream memstream = new MemoryStream();
             serializer.WriteObject(memstream, command);
 
