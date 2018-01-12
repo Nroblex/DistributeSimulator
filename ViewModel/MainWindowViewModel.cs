@@ -2,10 +2,12 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
+using IOPath = System.IO.Path;
 
 namespace GitUtilSimulate.ViewModel
 {
@@ -13,12 +15,13 @@ namespace GitUtilSimulate.ViewModel
     {
         private string mExternalFtp;
         private string mExternalFtpUser;
-        //private string mExternalFtpPass;
         private string mBuildNo;
         private string mBuildPath;
-        
 
+        private string selectedPath;
+        
         private ICommand sendGitUtilCommand;
+        private ICommand browseForFolder;
 
         private bool canExecute = true;
 
@@ -27,6 +30,21 @@ namespace GitUtilSimulate.ViewModel
         public MainWindowViewModel()
         {
             SendGitUtilCommand = new DelegateCommand(DoSendGitJSON, param => this.canExecute);
+            BrowseForFolder = new DelegateCommand(DoBrowseForFolder, param => canExecute);
+        }
+
+        private void DoBrowseForFolder(object obj)
+        {
+            string s = ";";
+        }
+
+        public string SelectedPath
+        {
+            get => selectedPath;
+            private set
+            {
+                selectedPath = value;
+            }
         }
 
         public string ExternalFtp
@@ -69,7 +87,11 @@ namespace GitUtilSimulate.ViewModel
             }
         }
 
-
+        public ICommand BrowseForFolder
+        {
+            get { return browseForFolder; }
+            set { browseForFolder = value; }
+        }
         public ICommand SendGitUtilCommand
         {
             get
@@ -93,6 +115,11 @@ namespace GitUtilSimulate.ViewModel
             {
                 sendGitUtilCommand = value;
             }
+        }
+
+        private void DoBrowseForFolder()
+        {
+            String x = "a";
         }
 
         private void DoSendGitJSON(object obj)

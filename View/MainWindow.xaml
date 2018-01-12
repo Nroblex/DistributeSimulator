@@ -7,6 +7,7 @@
         xmlns:Model="clr-namespace:GitUtilSimulate.Model"
         xmlns:local="clr-namespace:GitUtilSimulate"
         mc:Ignorable="d"
+        
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel Margin="5">
@@ -39,13 +40,19 @@
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Width="100" VerticalAlignment="Center">Path-to-build:</TextBlock>
                 <TextBox Width="200" Name="txtPathBuild" Text="{Binding BuildPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Width="120" x:Name="btnBrowse" Margin="10,0,0,0" Command="{Binding BrowseForFolder}" Content="{Binding BrowseForFolder}"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="100" Margin="5" Command="{Binding SendGitUtilCommand}" 
                         CommandParameter="{Binding ElementName=txtExternFtpPassword, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">Create</Button>
             </StackPanel>
-            
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Width="200" Margin="5">
+                    <Label Name="informationLabel">Info:</Label>
+                </TextBlock>
+            </StackPanel>
         </StackPanel>
         
     </Grid>
