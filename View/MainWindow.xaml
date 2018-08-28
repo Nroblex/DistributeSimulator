@@ -6,9 +6,9 @@
         xmlns:ViewModel="clr-namespace:GitUtilSimulate.ViewModel"
         xmlns:Model="clr-namespace:GitUtilSimulate.Model"
         xmlns:local="clr-namespace:GitUtilSimulate"
-        mc:Ignorable="d"
-        
-        Title="MainWindow" Height="350" Width="525">
+        mc:Ignorable="d" 
+        Title="MainWindow" Height="350" Width="525" >
+
     <Grid>
         <StackPanel Margin="5">
             
@@ -43,6 +43,7 @@
                 <Button Width="120" x:Name="btnBrowse" Margin="10,0,0,0" Command="{Binding BrowseForFolder}" Content="{Binding BrowseForFolder}"/>
             </StackPanel>
             
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Width="100" Margin="5" Command="{Binding SendGitUtilCommand}" 
                         CommandParameter="{Binding ElementName=txtExternFtpPassword, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">Create</Button>
@@ -54,10 +55,13 @@
                 </TextBlock>
             </StackPanel>
         </StackPanel>
-        
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
+            <Button Width="100" Margin="5" Command="{Binding SendGitUtil}">Create</Button>
+        </StackPanel>
+
     </Grid>
     <Window.DataContext>
         <ViewModel:MainWindowViewModel />
-
     </Window.DataContext>
 </Window>
